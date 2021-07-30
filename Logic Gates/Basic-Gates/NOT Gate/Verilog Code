@@ -1,0 +1,26 @@
+// Code your design here
+module not_test(a,d);
+  input a;
+  output d;
+  wire d;
+  assign d = ~a;
+endmodule
+
+
+// Code your testbench here
+// or browse Examples
+module test;
+  reg a;
+  wire c;
+  //Instantiate design under test 
+  not_test DUT1 (.a(a),.d(c));
+  initial begin 
+    //Dump waves
+    $dumpfile("dump.vcd");
+    $dumpvars(1);
+    a = 1'b0;
+    $display("a:%h, c:%h",a,c);
+     #30 a = 1'b1;
+    $display("a:%h, c:%h",a,c);
+  end
+  endmodule

@@ -1,0 +1,9 @@
+EDA Playground Quick Help
+
+1) Navigate to the site --- https://www.edaplayground.com/
+2) Log in. Click the Log in button (top right).
+3) Then either click on Google or Facebook or register by clicking on ‘Register for a full account’ (which enables all the simulators on EDA Playground).
+4) Select your language from the Testbench + Design menu.
+5) Select your simulator from the Tools & Simulators menu. Using certain simulators will require you to supply additional identifcation information.
+6) Type in your code in the Testbench and Design windows.
+7) Click Run and check out the corresponding EP waves.

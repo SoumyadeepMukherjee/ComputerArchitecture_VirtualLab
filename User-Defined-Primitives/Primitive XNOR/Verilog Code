@@ -1,0 +1,46 @@
+// Code your design here
+primitive xnor_primt (C, A, B);
+input A, B;
+output C;
+table
+// A B C
+0 0 : 1 ;
+0 1 : 0 ;
+1 0 : 0 ;
+1 1 : 1 ;
+endtable
+endprimitive
+module xnor_test(a,b,c);
+input a,b;
+output c; 
+reg c;
+xnor_primt u1(c, b, a);
+endmodule
+
+
+// Code your testbench here
+// or browse Examples
+module test;
+
+reg x;
+reg y;
+wire z;
+// Instantiate design under test
+xnor_test DUT1(.a(x), .b(y), .c(z));
+initial begin
+// Dump waves
+$dumpfile("dump.vcd");
+$dumpvars(1);
+x = 0;
+y = 0;
+#5
+x = 0;
+y = 1;
+#5
+x = 1;
+y = 0;
+#5
+x = 1;
+y = 1;
+end
+endmodule

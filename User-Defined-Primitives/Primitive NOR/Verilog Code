@@ -1,0 +1,43 @@
+//Code your design here
+primitive nor_primt (C, A, B);
+input A, B;
+output C;
+table
+// A B C
+1 ? : 0 ;
+? 1 : 0 ;
+0 0 : 1 ;
+endtable
+endprimitive
+module nor_test(a,b,c);
+input a,b;
+output c;
+reg c;
+nor_primt u1(c, b, a);
+endmodule
+
+
+//Code your testbench here
+module test;
+reg x;
+reg y;
+wire z;
+// Instantiate design under test
+nor_test DUT1(.a(x), .b(y), .c(z));
+initial begin
+// Dump waves
+$dumpfile("dump.vcd");
+$dumpvars(1);
+x = 0;
+y = 0;
+#5
+x = 0;
+y = 1;
+#5
+x = 1;
+y = 0;
+#5
+x = 1;
+y = 1;
+end
+endmodule

@@ -1,0 +1,48 @@
+//Code your design here
+primitive nand_primt (C, A, B);
+input A, B;
+output C;
+table
+// A B C
+0 ? : 1 ;
+? 0 : 1 ;
+1 1 : 0 ;
+endtable
+endprimitive
+module nand_test(a,b,c);
+input a,b;
+output c;
+reg c;
+nand_primt u1(c, b, a);
+endmodule
+
+
+//Code your testbench here
+module test;
+reg x;
+reg y;
+wire z;
+// Instantiate design under test
+nand_test DUT1(.a(x), .b(y), .c(z));
+initial begin
+// Dump waves
+$dumpfile("dump.vcd");
+$dumpvars(1);
+
+x = 0;
+y = 1;
+#5
+x = 1;
+y = 0;
+#5
+x = 1;
+y = 1;
+#5
+x = 0;
+y = 0;
+#5
+
+x = 1;
+y = 1;
+end
+endmodule

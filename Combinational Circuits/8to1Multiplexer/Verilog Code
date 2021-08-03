@@ -1,0 +1,58 @@
+//Code your design here
+module twoinputmux(x,y,S,Z);
+     input x,y,S;
+     output Z;
+  
+  assign Z = S ? y : x;
+endmodule
+
+module fourto1_mux (I,Out,S);
+  input [3:0]I;
+  input [1:0]S;
+  output Out;
+ 
+  assign Out = ((~S[0]) & (~S[1]) & I[0]) | ((~S[1]) & S[0] & I[1] )| (S[1] & (~S[0]) & I[2]) | (S[1] & S[0] & I[3]);
+ endmodule
+
+module eightto1_mux (I,S,Out);
+  input [7:0]I;
+  input [2:0]S;
+  output Out;
+  wire e,e1,Out;
+  
+  fourto1_mux  u1(I[3:0],e,S[1:0]), 
+               u2(I[7:4],e1,S[1:0]);
+  twoinputmux u3(e,e1,S[2],Out);
+endmodule
+
+
+//Code your testbench here
+module test;
+  reg [7:0]I;
+  reg [2:0]S;
+  wire Out;
+
+eightto1_mux DUT1(.I(I),.S(S),.Out(Out));
+initial begin
+    
+//Dump Waves
+    $dumpfile("dump.vcd");
+    $dumpvars(1);
+
+    I=8'b00001011;
+    
+    S=3'b001;
+    #5
+      
+    I=8'b00001000;
+    S=3'b100;
+    #5
+    I=8'b10000000;
+      S=3'b111;
+    #5  
+    
+    I=8'b10000001;
+      S=3'b110;
+    
+end
+endmodule

@@ -1,0 +1,37 @@
+//Code your design here
+module fourto1_mux (I,S,Out);
+  input [3:0]I;
+  input [1:0]S;
+  output Out;
+ 
+ assign Out = (~S[0] & ~S[1] & I[0]) | (~S[1] & S[0] & I[1] )| (S[1] & ~S[0] & I[2]) | (S[1] & S[0] & I[3]);
+ endmodule
+
+
+//Code your testbench here
+module test;
+  reg [3:0]I;
+  reg [1:0]S;
+  wire Out;
+  
+  fourto1_mux DUT1(.I(I),.S(S),.Out(Out));
+  initial begin
+//Dump Waves
+    $dumpfile("dump.vcd");
+    $dumpvars(1);
+    
+S=2'b00;
+I=4'b0001;
+#5
+S=2'b01;
+I=4'b0010;
+#5
+S=2'b10;
+I=4'b1000;
+#5
+S=2'b11;
+I=4'b0111;
+
+end
+endmodule
+

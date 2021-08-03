@@ -1,0 +1,39 @@
+//Code your design here
+module complementor( Out ,inp);
+  input[3:0]inp;
+  output[3:0]Out;
+  assign Out[0]=inp[0];
+  assign Out[1]=inp[0] ^ inp[1];
+  assign Out[2]=inp[2]^(inp[0] | inp[1]);
+  assign Out[3]=inp[3]^(inp[0] | inp[1] | inp[2]);
+  endmodule
+
+//Code your testbench here
+module test;
+  reg[3:0]inp;
+  wire[3:0]Out;
+  
+  complementor DUT1(.Out(Out),.inp(inp));
+  initial begin
+  //Dump Waves
+    $dumpfile("dump.vcd");
+    $dumpvars(1);
+    inp=4'b0000;
+    #5
+    inp=4'b0001;
+    #5
+    inp=4'b0010;
+    #5
+    inp=4'b0011;
+    #5
+    inp=4'b0100;
+    #5
+    inp=4'b0101;
+    #5
+    inp=4'b0110;
+    #5
+    inp=4'b0111;
+    
+end
+endmodule
+

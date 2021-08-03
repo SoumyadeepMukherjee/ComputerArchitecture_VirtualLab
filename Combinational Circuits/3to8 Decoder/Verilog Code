@@ -1,0 +1,53 @@
+//Code your design here
+module deco3_8 (a,b,c,Out);
+  input a,b,c;
+  output [7:0]Out;
+
+  assign Out[0] = ( ~a & ~b & ~c);
+  
+  assign Out[1] = ( ~a & ~b & c);
+  
+  assign Out[2] = ( ~a & b & ~c);
+  
+  assign Out[3] = ( ~a & b & c);
+  
+  assign Out[4] = ( a & ~b & ~c);
+  
+  assign Out[5] = ( a & ~b & c);
+  
+  assign Out[6] = ( a & b & ~c);
+  
+  assign Out[7] = ( a & b & c);
+  
+endmodule
+
+
+//Code your testbench here
+module test;
+reg a,b,c;
+wire [7:0]Out;
+  
+//Instantiate design under test
+deco3_8 DUT1(.a(a),.b(b),.c(c),.Out(Out));
+initial begin
+//Dump Waves
+    
+    $dumpfile("dump.vcd");
+    $dumpvars(1);
+a=0;b=0;c=0;
+#5
+a=0;b=0;c=1;
+#5    
+a=0;b=1;c=0;
+#5    
+a=0;b=1;c=1;
+#5    
+a=1;b=0;c=0;
+#5
+a=1;b=0;c=01;
+#5 
+a=1;b=1;c=0;
+#5 
+a=1;b=1;c=1;
+end
+endmodule

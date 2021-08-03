@@ -1,0 +1,48 @@
+//Code your design here
+module mux2_1(out, I0, I1, sel);
+	input I0, I1;
+    input sel;
+    output out;
+    assign out=sel? I1 : I0;
+endmodule
+
+module majority_test(out,inp);
+	input [3:0]inp;
+    output out;
+    mux2_1 u1(out,inp[0] & inp[1],inp[1] | inp[0],inp[2]);
+endmodule
+
+//Code your testbench here
+module test;
+	reg[3:0]inp;
+    wire out;
+    //Instantiate design under test
+    majority_test DUT1(.out(out),.inp(inp));
+    initial begin
+    //Dump waves
+    $dumpfile("dump.vcd");
+    $dumpvars(1);
+    inp=3'b000;
+    #10 $display("imp:%h,out:%h",
+    inp,out);
+    inp=3'b001;
+    #10 $display("imp:%h,out:%h",
+    inp,out);
+    inp=3'b010;
+    #10 $display("imp:%h,out:%h",
+    inp,out);
+    inp=3'b011;
+    #10 $display("imp:%h,out:%h",
+    inp,out);
+    inp=3'b100;
+    #10 $display("imp:%h,out:%h",
+    inp,out);
+    inp=3'b101;
+    #10 $display("imp:%h,out:%h",
+    inp,out);
+    inp=3'b110;
+    #10 $display("imp:%h,out:%h",
+    inp,out);
+    inp=3'b111;
+    end
+endmodule

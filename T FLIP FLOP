@@ -1,0 +1,38 @@
+module T(t, clk, q, q_bar);
+  input t;
+  input clk;
+  output q,q_bar;
+  reg q,q_bar;
+  initial q = 1;
+  always @(posedge clk) begin
+    if(t == 1) begin
+      q = q_bar;
+      q_bar = q;
+    end
+      q_bar = ~q;
+  end
+endmodule
+
+
+module test;
+  reg t;
+  reg clk;
+  wire q,q_bar;
+  T DUT1(.t(t), .clk(clk), .q(q), .q_bar(q_bar));
+  initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars;
+    clk = 1'b1;
+    t = 1'b0;
+    #5
+    clk = 1'b1;
+    t = 1'b0;
+    #5
+    clk = 1'b1;
+    t = 1'b1;
+    #5
+    clk = 1'b1;
+    t = 1'b1;
+  end
+  //always #5 clk = ~clk;
+endmodule
